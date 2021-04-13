@@ -104,10 +104,11 @@ span {
 
 @media only screen and (max-device-width: 480px) {
 	.todocontainer {
-		width: 95%;
+		width: 300px;
+		margin-left: 10px;
 	}
 
 	input {
-		height: 58px;
+		height: 80px;
 	}
 }
