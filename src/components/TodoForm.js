@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-function TodoForm({ addTodoCallback }) {
-  const [input, setInput] = useState("");
+function TodoForm({ addTodoCallback, name, editedTodo, UpdateTodoCallback }) {
+  const [input, setInput] = useState(name ? editedTodo.text : "");
+  const Forminput = useRef(null);
   const handleInput = (e) => {
     setInput(e.target.value);
   };
   const handleSubmit = (e) => {
+    // debugger;
     e.preventDefault();
-    addTodoCallback(input);
+
+    name ? UpdateTodoCallback(editedTodo, input) : addTodoCallback(input);
+    setInput("");
+    Forminput.current.focus();
+    console.log("formvalue", Forminput.current.focus());
   };
+
+  useEffect(() => {
+    Forminput.current.focus();
+  }, [input]);
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -16,9 +27,10 @@ function TodoForm({ addTodoCallback }) {
           type="text"
           onChange={handleInput}
           value={input}
-          placeholder="Enter your Todo"
+          placeholder={name ? "Edit your Todo" : "Enter your Todo"}
+          ref={Forminput}
         ></input>
-        <button>sumbit</button>
+        <button>{name ? "Edit your Todo" : "Add  your Todo"}</button>
       </form>
     </>
   );
