@@ -156,7 +156,8 @@ span {
 	}
 
 	input {
-		height: 41px;
+		height: 45px;
+		width: 70%;
 	}
 
 	form {
